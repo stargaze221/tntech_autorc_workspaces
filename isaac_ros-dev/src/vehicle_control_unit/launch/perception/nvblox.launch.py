@@ -145,7 +145,7 @@ def add_nvblox(args: lu.ArgumentContainer) -> List[Action]:
     elif camera is NvbloxCamera.realsense:
         remappings = get_realsense_remappings(mode, num_cameras)
         camera_config = realsense_config
-        assert not use_lidar, 'Can not run lidar for realsense example.'
+        # assert not use_lidar, 'Can not run lidar for realsense example.'
     elif camera is NvbloxCamera.multi_realsense:
         remappings = get_realsense_remappings(mode, num_cameras)
         camera_config = multi_realsense_config

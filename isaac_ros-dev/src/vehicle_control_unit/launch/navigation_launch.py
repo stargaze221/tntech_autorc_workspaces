@@ -194,7 +194,7 @@ def generate_launch_description() -> LaunchDescription:
                 'mode': args.mode,
                 'camera': camera_mode,
                 'num_cameras': args.num_cameras,
-                'lidar': 'False',   # ← ✅ 0711 Add
+                'lidar': 'True',   # ← ✅ 0711 Add
 
             }
         )
@@ -254,35 +254,35 @@ def generate_launch_description() -> LaunchDescription:
         )
     )
 
-    # # vesc_bridge_node
-    # actions.append(
-    #     Node(
-    #         package='vehicle_control_unit',
-    #         executable='vesc_bridge_node_new',
-    #         name='vesc_bridge_node_new',
-    #         output='screen'
-    #     )
-    # )
+    # vesc_bridge_node
+    actions.append(
+        Node(
+            package='vehicle_control_unit',
+            executable='vesc_bridge_node',
+            name='vesc_bridge_node',
+            output='screen'
+        )
+    )
 
-    # # manual_control_node
-    # actions.append(
-    #     Node(
-    #         package='vehicle_control_unit',
-    #         executable='manual_control_node',
-    #         name='manual_control_node',
-    #         output='screen'
-    #     )
-    # )
+    # manual_control_node
+    actions.append(
+        Node(
+            package='vehicle_control_unit',
+            executable='manual_control_node',
+            name='manual_control_node',
+            output='screen'
+        )
+    )
 
-    # # cmd_vel_node
-    # actions.append(
-    #     Node(
-    #         package='vehicle_control_unit',
-    #         executable='cmd_vel_to_motor',
-    #         name='cmd_vel_to_motor',
-    #         output='screen'
-    #     )
-    # )                  
+    # cmd_vel_node
+    actions.append(
+        Node(
+            package='vehicle_control_unit',
+            executable='cmd_vel_node',
+            name='cmd_vel_node',
+            output='screen'
+        )
+    )                  
                       
     
             

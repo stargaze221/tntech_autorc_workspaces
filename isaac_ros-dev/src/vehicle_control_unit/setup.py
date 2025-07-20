@@ -44,11 +44,9 @@ setup(
             'rc_bridge_node = vehicle_control_unit.rc_bridge_node:main',
             'vesc_bridge_node = vehicle_control_unit.vesc_bridge_node:main',
             'odom_relay_node = vehicle_control_unit.odom_relay_node:main',
-            # 'rc_pwm_to_cmd_vel_node = vehicle_control_unit.rc_pwm_to_cmd_vel_node:main',
-            # 'cmdvel_to_pwm_serial_node = vehicle_control_unit.cmdvel_to_pwm_serial_node:main',
-            # 'cmdvel_to_pwm_serial_pid_ctrl_node = vehicle_control_unit.cmdvel_to_pwm_serial_pid_ctrl_node:main',
-            # 'cmd_vel_to_motor = vehicle_control_unit.cmd_vel:main',
-            # 'cmd_vel_duty = vehicle_control_unit.cmd_vel_duty:main',
+            'manual_control_node = vehicle_control_unit.manual_control_node:main',
+            'cmd_vel_node = vehicle_control_unit.cmd_vel_node:main',
+            
 
         ],
     },

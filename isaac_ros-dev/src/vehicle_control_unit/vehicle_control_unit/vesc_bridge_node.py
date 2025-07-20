@@ -23,8 +23,8 @@ class VESCBridgeNode(Node):
         self.last_rpm_cmd = 0
         self.kickstart_active = False
         self.kickstart_start_time = None
-        self.kickstart_duration = 0.0  # seconds
-        self.kickstart_duty = 0.0      # 0% duty  # After adding hall sensor, we do not need this kick start!
+        self.kickstart_duration = 0.2  # seconds
+        self.kickstart_duty = 0.05      # 0% duty  # After adding hall sensor, we do not need this kick start!
 
         # ROS interfaces
         self.create_subscription(Int32, 'vesc_rpm_cmd', self.update_rpm_command, 10)
