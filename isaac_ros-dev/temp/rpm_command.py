@@ -1,7 +1,7 @@
 from pyvesc import VESC
 import time
 
-serial_port = "/dev/ttyACM0"  # 실제 포트로 설정
+serial_port = "/host_dev/vesc"  # 실제 포트로 설정
 MAX_RETRIES = 3
 
 def initialize_vesc(port, max_retries=3, time_out=0.5):
