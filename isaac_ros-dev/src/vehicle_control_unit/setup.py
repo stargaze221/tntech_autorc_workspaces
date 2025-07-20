@@ -25,7 +25,8 @@ setup(
     entry_points={
         'console_scripts': [
             'rc_bridge_node = vehicle_control_unit.rc_bridge_node:main',
-            
+            'vesc_bridge_node = vehicle_control_unit.vesc_bridge_node:main',
+
         ],
     },
 )
