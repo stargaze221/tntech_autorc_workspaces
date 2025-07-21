@@ -50,6 +50,11 @@ class CmdVelToMotorNode(Node):
         self.dt = 0.001 # 주기 = 20Hz
         self.min_erpm = 500
 
+        # ⬇️ Unstuck logic states
+        self.unstuck_timer = 0.0
+        self.unstuck_phase = 0  # 0 = idle, 1 = forward, 2 = backward
+        self.unstuck_dt = self.dt
+
         self.loop_timer = self.create_timer(self.dt, self.control_loop)
 
         self.get_logger().info("✅ CmdVelToMotorNode with battery voltage monitoring initialized.")
@@ -78,6 +83,35 @@ class CmdVelToMotorNode(Node):
         target_v = self.latest_cmd_vel.linear.x
         target_omega = self.latest_cmd_vel.angular.z
 
+        # Check if robot is stuck in place while trying to rotate
+        if abs(target_v) < 0.01 and abs(target_omega) > 0.1 and abs(self.prev_v) < 0.01:
+            if self.unstuck_phase == 0:
+                self.unstuck_phase = 1
+                self.unstuck_timer = 0.0
+                self.get_logger().info("🧱 Stuck detected → Start unstuck sequence")
+
+            if self.unstuck_phase == 1:
+                target_v = 0.3
+                self.unstuck_timer += self.unstuck_dt
+                if self.unstuck_timer > 0.1:
+                    self.unstuck_phase = 2
+                    self.unstuck_timer = 0.0
+                    self.get_logger().info("🔁 Unstuck phase 2: backward")
+
+            elif self.unstuck_phase == 2:
+                target_v = -0.3
+                self.unstuck_timer += self.unstuck_dt
+                if self.unstuck_timer > 0.1:
+                    self.unstuck_phase = 0
+                    self.unstuck_timer = 0.0
+                    self.get_logger().info("✅ Unstuck complete → Resume normal control")
+
+        else:
+            self.unstuck_phase = 0
+            self.unstuck_timer = 0.0
+
+
+
         delta_v = target_v - self.prev_v
         max_delta_v = self.max_accel * self.dt
         if abs(delta_v) > max_delta_v:
@@ -98,8 +132,8 @@ class CmdVelToMotorNode(Node):
         else:
             erpm = int(v / (K * SCALE))
             # Clamp to minimum absolute value if not zero
-            if abs(erpm) < 500:
-                erpm = int(math.copysign(500, erpm))
+            if abs(erpm) < 200:
+                erpm = int(math.copysign(200, erpm))
 
         erpm = max(min(erpm, 10000), -10000)
 
