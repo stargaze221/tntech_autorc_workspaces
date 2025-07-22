@@ -65,3 +65,16 @@ Ensure persistent access to your VESC, Lidar, and Arduino devices by configuring
   ```bash
   CONFIG_IMAGE_KEY=ros2_humble.realsense.onetenthrc
   ```
+- **"Realsense Udev Rule"**  
+  Despite the usbreset tool, it still neeed the following UDEV rule changes.
+
+  Create UDEV rule 
+
+  sudo nano /etc/udev/rules.d/99-realsense-usb.rules
+
+  With the following content
+  
+  SUBSYSTEM=="usb", ATTR{idVendor}=="8086", ATTR{idProduct}=="0b3a", MODE="0666"
+  SUBSYSTEM=="usb", ATTR{idVendor}=="8086", ATTR{idProduct}=="0b07", MODE="0666"
+
+  ```
