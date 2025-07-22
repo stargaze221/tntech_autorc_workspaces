@@ -90,11 +90,19 @@ def generate_launch_description() -> LaunchDescription:
         )
     )
 
-    # Launch SLLIDAR C1
+    # # Launch SLLIDAR C1
+    # actions.append(
+    #     lu.include(
+    #         'sllidar_ros2',
+    #         'launch/sllidar_c1_launch.py',
+    #         {},
+    #     )
+    # )
+    # Launch YDLidar
     actions.append(
         lu.include(
-            'sllidar_ros2',
-            'launch/sllidar_c1_launch.py',
+            'ydlidar_ros2_driver',
+            'launch/ydlidar_launch.py',
             {},
         )
     )
