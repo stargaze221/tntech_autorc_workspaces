@@ -198,7 +198,7 @@ local_costmap:
         plugin: "nav2_costmap_2d::InflationLayer"
         enabled: True
         cost_scaling_factor: 10.0
-        inflation_radius: 0.8
+        inflation_radius: 0.5
 
       nvblox_layer:
         plugin: "nvblox::nav2::NvbloxCostmapLayer"
@@ -243,7 +243,7 @@ global_costmap:
         plugin: "nav2_costmap_2d::InflationLayer"
         enabled: True
         cost_scaling_factor: 3.0
-        inflation_radius: 1.0
+        inflation_radius: 0.5
 
       nvblox_layer:
         plugin: "nvblox::nav2::NvbloxCostmapLayer"
