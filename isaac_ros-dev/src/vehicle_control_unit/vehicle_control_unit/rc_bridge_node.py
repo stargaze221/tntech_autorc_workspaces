@@ -19,8 +19,8 @@ class RCBridgeNode(Node):
         self.publisher_ch2 = self.create_publisher(Int32, 'rc/ch2', 10)
         self.publisher_ch3 = self.create_publisher(Int32, 'rc/ch3', 10)
 
-        # Periodic sender (50 Hz)
-        self.create_timer(0.02, self.send_servo_periodic)
+        # Periodic sender (20 Hz)
+        self.create_timer(0.05, self.send_servo_periodic)
 
         # Start background thread to read from Arduino
         if self.arduino_serial:
@@ -60,6 +60,7 @@ class RCBridgeNode(Node):
                         self.publisher_ch1.publish(Int32(data=ch_values[0]))
                         self.publisher_ch2.publish(Int32(data=ch_values[1]))
                         self.publisher_ch3.publish(Int32(data=ch_values[2]))
+                        
             except Exception as e:
                 self.get_logger().warn(f"⚠️ Arduino read error: {e}")
 
