@@ -7,3 +7,6 @@
 [submodule "isaac_ros-dev/src/sllidar_ros2"]
     path = isaac_ros-dev/src/sllidar_ros2
     url = https://github.com/Slamtec/sllidar_ros2.git
+[submodule "isaac_ros-dev/src/ydlidar_ros2_driver"]
+	path = isaac_ros-dev/src/ydlidar_ros2_driver
+	url = https://github.com/stargaze221/ydlidar_ros2_driver.git
