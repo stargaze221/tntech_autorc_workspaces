@@ -12,7 +12,7 @@ class VESCBridgeNode(Node):
         # Parameters
         self.declare_parameter('use_kickstart', True)
         self.declare_parameter('verbose', False)
-        self.declare_parameter('reverse', True)
+        self.declare_parameter('reverse', False)
 
         self.use_kickstart = self.get_parameter('use_kickstart').value
         self.verbose = self.get_parameter('verbose').value
