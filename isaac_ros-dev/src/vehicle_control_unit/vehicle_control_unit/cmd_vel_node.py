@@ -7,13 +7,13 @@ from sensor_msgs.msg import BatteryState
 import math
 
 # === 차량 파라미터 ===
-WHEELBASE = 0.38
-STEERING_LEFT = 123
-STEERING_RIGHT = 55
-STEERING_CENTER = 95
-STEERING_K = 0.75
-K = 0.001109
-SCALE = 0.275
+WHEELBASE = 0.3
+STEERING_LEFT = 91+40
+STEERING_RIGHT = 91-40
+STEERING_CENTER = 91
+STEERING_K = 0.5  # 500 rpm, 40 deg -> 0.25 rad/s
+K = 0.2/500   # 500 rpm matches to 0.2 m/s
+SCALE = 1.0
 
 class CmdVelToMotorNode(Node):
     def __init__(self):
@@ -65,7 +65,7 @@ class CmdVelToMotorNode(Node):
 
     def battery_callback(self, msg: BatteryState):
         self.latest_voltage = msg.voltage
-        self.get_logger().info(f"🔋 VESC Battery Voltage: {self.latest_voltage:.2f} V")
+        # self.get_logger().info(f"🔋 VESC Battery Voltage: {self.latest_voltage:.2f} V")
 
     def control_loop(self):
         if self.stop_flag:
@@ -121,7 +121,7 @@ class CmdVelToMotorNode(Node):
         # === 퍼블리시 ===
         self.rpm_pub.publish(Int32(data=erpm))
         self.servo_pub.publish(Int32(data=steering_pwm))
-        self.get_logger().info(f"Published eRPM: {erpm}, PWM: {steering_pwm}")
+        # self.get_logger().info(f"Published eRPM: {erpm}, PWM: {steering_pwm}")
 
     
 
